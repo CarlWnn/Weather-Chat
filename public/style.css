@@ -1,0 +1,14 @@
+p{
+    font-size: 35px;
+    -webkit-text-fill-color: blue;  
+}
+
+.container-fluid {
+    
+    border: 5px solid black;
+    border-radius: 10px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    
+    
+}
