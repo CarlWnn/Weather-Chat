@@ -1,3 +1,5 @@
+"use strict";
+
 var posts = [];
 
 var fetch = function (city) {
@@ -6,7 +8,7 @@ var fetch = function (city) {
         success: function (data) {
 
             create_post(data);
-            _displayPost();
+           // _displayPost();
 
         },
         error: function () {
@@ -35,33 +37,33 @@ var create_post = function (data) {
 
     }
     posts.unshift(post);
-
+    _renderPosts();
 }
 
-var _displayPost = function () {
-    var post = posts[0];
+// var _displayPost = function () {
+//     var post = posts[0];
 
-    var postHTML =
-        '<li class="container-fluid post">' +
-        '<h1 class = "city" >' + post.city + ',' + post.country + '</h1>' +
-        '<button class="btn btn-danger float-right my-class" type="button">' +
-        '<i  class="fa fa-trash" aria-hidden="true"></i>' + '</button>' +
-        '<p  class= "temp">' + post.temp.celsius + 'C/' + post.temp.fahrenheit + 'F  at ' +
-        post.time.hour + ' on ' + post.time.date + '</p>' +
-        //'<div class= "comments-container">'
-        '<ul class="comments-list">' + '</ul>' +
-        '<div class="input-group">' +
-        '<input type="text" class="form-control enter-comment" placeholder="Comment about the weather" aria-describedby="basic-addon1">' +
-        '<div class="input-group-append">' +
-        '<button class="btn btn-success btn-comment" type="button"> Comment </button>' +
-        '</div>' +
-        '</div>' +
-        //'</div>' +
-        '</li>';
+//     var postHTML =
+//         '<li class="container-fluid post">' +
+//         '<h1 class = "city" >' + post.city + ',' + post.country + '</h1>' +
+//         '<button class="btn btn-danger float-right my-class" type="button">' +
+//         '<i  class="fa fa-trash" aria-hidden="true"></i>' + '</button>' +
+//         '<p  class= "temp">' + post.temp.celsius + 'C/' + post.temp.fahrenheit + 'F  at ' +
+//         post.time.hour + ' on ' + post.time.date + '</p>' +
+//         //'<div class= "comments-container">'
+//         '<ul class="comments-list">' + '</ul>' +
+//         '<div class="input-group">' +
+//         '<input type="text" class="form-control enter-comment" placeholder="Comment about the weather" aria-describedby="basic-addon1">' +
+//         '<div class="input-group-append">' +
+//         '<button class="btn btn-success btn-comment" type="button"> Comment </button>' +
+//         '</div>' +
+//         '</div>' +
+//         //'</div>' +
+//         '</li>';
 
-    $('.posts').prepend(postHTML);
+//     $('.posts').prepend(postHTML);
 
-}
+// }
 
 var _renderPosts = function () {
 
@@ -103,7 +105,7 @@ var post_comment = function ($clickedPost) {
     var comment = $clickedPost.find('.enter-comment').val();
     //var comment = $(this).closest('.input-group').find('.enter-comment').val();
     //var comment = $(this).closest('input').val();   //does not work!!
-    postIndex = $clickedPost.index();
+    var  postIndex = $clickedPost.index();
     posts[postIndex].comments.push(comment);
     $clickedPost.find('.comments-list').append('<li>' + comment + '</li>');
     $('.enter-comment').val('');
@@ -153,14 +155,14 @@ $('.request-form').submit(function (event) {
 
 // post comment 
 $('.posts').on('click', '.btn-comment', function () {
-    $clickedPost = $(this).closest('.post');
+    var $clickedPost = $(this).closest('.post');
     post_comment($clickedPost);
 
 });
 
 //remove one result 
 $('.posts').on('click', '.btn-danger', function () {
-    $clickedPost = $(this).closest('.post');
+    var $clickedPost = $(this).closest('.post');
     delete_post($clickedPost);
     //$(this).closest('.container-fluid').remove();
 });
